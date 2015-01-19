@@ -30,7 +30,7 @@ class ViewController: UIViewController {
         
     
         
-        let baseURL1 = NSURL(string: "http://api.zippopotam.us/us/85719")
+        let baseURL1 = NSURL(string: "http://api.zippopotam.us/us/76543")
         
         let urldata = NSData(contentsOfURL: baseURL1!, options: nil, error: nil)
         
@@ -40,12 +40,23 @@ class ViewController: UIViewController {
         
         let placesArr : NSArray = parsedObject["places"] as NSArray
         let placesDict : NSDictionary = placesArr[0] as NSDictionary
-        println(placesDict["latitude"]!)
+        println(placesDict)
         
-        var longitude = "37.8267"
-        var latitude = "32.2474"
+        var state = placesDict["state"]! as String
+        var lat = placesDict["latitude"]! as String
+        var long = placesDict["longitude"] as String
+        var placeName = placesDict["place name"] as String
         
-        let baseURL = NSURL(string: "https://api.forecast.io/forecast/679dabfb8a1db5a2d53599f4e10db597/\(longitude),\(latitude)")
+        println(state)
+        println("\(lat),\(long)")
+        println(placeName)
+        var longitude = "-122.423"
+        var latitude = "37.8267"
+        
+        //var latitude : Double = placesDict["latitude"]! as Double
+        //var longitude : Double = placesDict["longitude"]! as Double
+        
+        let baseURL = NSURL(string: "https://api.forecast.io/forecast/679dabfb8a1db5a2d53599f4e10db597/\(lat),\(long)")
         
 //        let baseURL1 = NSURL(string: "https://represent.io/shivkanthb.json")
 //        
@@ -79,7 +90,7 @@ class ViewController: UIViewController {
                     self.dewLabel.text = "\(dictValues.dew)"
                     self.summaryLabel.text = "\(dictValues.summary)"
                     self.iconView.image = dictValues.iconImg
-                    self.locationLabel.text = "Tucson, AZ"
+                    self.locationLabel.text = "\(placeName), \(state)"
                 })
             }
             else{
