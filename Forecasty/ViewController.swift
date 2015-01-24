@@ -28,8 +28,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-    
         
+        getForecast()
+        
+        
+    }
+    
+    func getForecast()
+    {
         let baseURL1 = NSURL(string: "http://api.zippopotam.us/us/76543")
         
         let urldata = NSData(contentsOfURL: baseURL1!, options: nil, error: nil)
@@ -58,23 +64,23 @@ class ViewController: UIViewController {
         
         let baseURL = NSURL(string: "https://api.forecast.io/forecast/679dabfb8a1db5a2d53599f4e10db597/\(lat),\(long)")
         
-//        let baseURL1 = NSURL(string: "https://represent.io/shivkanthb.json")
-//        
-//        let urldata = NSData(contentsOfURL: baseURL!, options: nil, error: nil)
-//        
-//
-//        let parsedObject : AnyObject? = NSJSONSerialization.JSONObjectWithData(urldata!, options:nil, error:nil)
-//        println(parsedObject!)
+        //        let baseURL1 = NSURL(string: "https://represent.io/shivkanthb.json")
+        //
+        //        let urldata = NSData(contentsOfURL: baseURL!, options: nil, error: nil)
+        //
+        //
+        //        let parsedObject : AnyObject? = NSJSONSerialization.JSONObjectWithData(urldata!, options:nil, error:nil)
+        //        println(parsedObject!)
         
         let sharedSession : NSURLSession = NSURLSession.sharedSession()
         let downloadTask : NSURLSessionDownloadTask = sharedSession.downloadTaskWithURL(baseURL!, completionHandler: { (location: NSURL!, response: NSURLResponse!, error: NSError!) -> Void in
             
             if(error == nil)
             {
-            let dataObj = NSData(contentsOfURL: location)
-            
-            let weatherDictionary : NSDictionary = NSJSONSerialization.JSONObjectWithData(dataObj!, options:nil, error:nil) as NSDictionary
-            
+                let dataObj = NSData(contentsOfURL: location)
+                
+                let weatherDictionary : NSDictionary = NSJSONSerialization.JSONObjectWithData(dataObj!, options:nil, error:nil) as NSDictionary
+                
                 //println(weatherDictionary)
                 
                 var dictValues = current(weather: weatherDictionary)
