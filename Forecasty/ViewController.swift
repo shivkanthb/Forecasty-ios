@@ -23,6 +23,7 @@ class ViewController: UIViewController, UISearchBarDelegate{
     
     @IBOutlet weak var summaryLabel: UILabel!
     
+    @IBOutlet weak var zipSearchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,9 @@ class ViewController: UIViewController, UISearchBarDelegate{
         
         getForecast("76543")
         
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: "hideKeyboard:")
+        self.view.addGestureRecognizer(tapGesture)
         
     }
     
@@ -114,6 +118,11 @@ class ViewController: UIViewController, UISearchBarDelegate{
         searchBar.text = ""
     }
     
+    func hideKeyboard(recognizer : UITapGestureRecognizer)
+    {
+        println("tapped")
+        self.zipSearchBar.resignFirstResponder()
+    }
     
     func refresh(sender: AnyObject)
     {
@@ -125,6 +134,6 @@ class ViewController: UIViewController, UISearchBarDelegate{
         // Dispose of any resources that can be recreated.
     }
 
-
+    
 }
 

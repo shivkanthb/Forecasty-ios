@@ -68,8 +68,8 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <searchBar alpha="0.49999999999999961" contentMode="redraw" fixedFrame="YES" barStyle="black" searchBarStyle="minimal" placeholder="Enter Zip code" translatesAutoresizingMaskIntoConstraints="NO" id="WLm-rD-rrq">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                            <searchBar alpha="0.49999999999999961" contentMode="redraw" barStyle="black" searchBarStyle="minimal" placeholder="Enter Zip code" translatesAutoresizingMaskIntoConstraints="NO" id="WLm-rD-rrq">
+                                <rect key="frame" x="0.0" y="40" width="320" height="44"/>
                                 <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits" keyboardAppearance="light" returnKeyType="search"/>
                                 <connections>
@@ -80,7 +80,9 @@
                         <color key="backgroundColor" red="0.17254901960784313" green="0.24313725490196078" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="3gO-Rd-YRu" firstAttribute="top" secondItem="lUv-NY-Nna" secondAttribute="bottom" constant="2" id="4ht-iY-dcd"/>
+                            <constraint firstItem="WLm-rD-rrq" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="20" id="5r3-ag-9hp"/>
                             <constraint firstItem="rtr-TY-37g" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="44" id="Aer-iZ-Tqe"/>
+                            <constraint firstItem="WLm-rD-rrq" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="BpC-XN-avs"/>
                             <constraint firstItem="gcq-1h-kPQ" firstAttribute="top" secondItem="LNx-HT-ZbW" secondAttribute="bottom" constant="10" id="DCc-gU-TOx"/>
                             <constraint firstAttribute="centerX" secondItem="lUv-NY-Nna" secondAttribute="centerX" id="Emb-eh-1e6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4sZ-ZM-2uu" secondAttribute="trailing" constant="40" id="IRN-d7-IhP"/>
@@ -93,6 +95,7 @@
                             <constraint firstItem="zCg-9S-rMv" firstAttribute="top" secondItem="rtr-TY-37g" secondAttribute="bottom" constant="5" id="dgb-Vy-2Le"/>
                             <constraint firstItem="LNx-HT-ZbW" firstAttribute="top" secondItem="3gO-Rd-YRu" secondAttribute="bottom" constant="-10" id="fXk-d6-LPC"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="afm-fd-DeB" secondAttribute="bottom" constant="60" id="lYr-Xo-9xg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WLm-rD-rrq" secondAttribute="trailing" constant="-16" id="nOf-cL-6ho"/>
                             <constraint firstItem="4sZ-ZM-2uu" firstAttribute="top" secondItem="gcq-1h-kPQ" secondAttribute="bottom" constant="5" id="och-Mo-XHA"/>
                             <constraint firstAttribute="centerX" secondItem="LNx-HT-ZbW" secondAttribute="centerX" constant="-0.5" id="r0z-JW-0nJ"/>
                             <constraint firstItem="afm-fd-DeB" firstAttribute="top" secondItem="LNx-HT-ZbW" secondAttribute="bottom" constant="80" id="tHK-LQ-Elk"/>
@@ -108,6 +111,7 @@
                         <outlet property="summaryLabel" destination="afm-fd-DeB" id="iI7-V2-RmU"/>
                         <outlet property="tempLabel" destination="LNx-HT-ZbW" id="PX7-63-Skv"/>
                         <outlet property="timeLabel" destination="gv3-s1-BGl" id="CVC-Wt-Ui3"/>
+                        <outlet property="zipSearchBar" destination="WLm-rD-rrq" id="H95-h4-AYS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
