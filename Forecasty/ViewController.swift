@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UISearchBarDelegate{
 
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var timeLabel: UILabel!
@@ -29,14 +29,14 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         
-        getForecast()
+        getForecast("76543")
         
         
     }
     
-    func getForecast()
+    func getForecast(zipc : String)
     {
-        let baseURL1 = NSURL(string: "http://api.zippopotam.us/us/76543")
+        let baseURL1 = NSURL(string: "http://api.zippopotam.us/us/\(zipc)")
         
         let urldata = NSData(contentsOfURL: baseURL1!, options: nil, error: nil)
         
@@ -105,6 +105,15 @@ class ViewController: UIViewController {
         })
         downloadTask.resume()
     }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        //searchBar.color = UIColor.whiteColor()
+        getForecast(searchBar.text)
+        println(searchBar.text)
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
+    }
+    
     
     func refresh(sender: AnyObject)
     {
