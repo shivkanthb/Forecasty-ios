@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import CoreLocation
 
-class ViewController: UIViewController, UISearchBarDelegate{
+class ViewController: UIViewController, UISearchBarDelegate, CLLocationManagerDelegate{
 
+    let locationManager = CLLocationManager()
+    
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var timeLabel: UILabel!
     
@@ -29,8 +32,15 @@ class ViewController: UIViewController, UISearchBarDelegate{
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
+
         
-        getForecast("76543")
+        
+        
+        //getForecast("76543")
         
         
         let tapGesture = UITapGestureRecognizer(target: self, action: "hideKeyboard:")
@@ -134,6 +144,42 @@ class ViewController: UIViewController, UISearchBarDelegate{
         // Dispose of any resources that can be recreated.
     }
 
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        
+        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
+            
+            if (error != nil) {
+                println("Error: " + error.localizedDescription)
+                return
+            }
+            
+            if placemarks.count > 0 {
+                let pm = placemarks[0] as CLPlacemark
+                self.displayLocationInfo(pm)
+            } else {
+                println("Error with the data.")
+            }
+        })
+    }
+    
+    func displayLocationInfo(placemark: CLPlacemark) {
+        
+        self.locationManager.stopUpdatingLocation()
+        println(placemark.locality)
+        println(placemark.postalCode)
+        println(placemark.administrativeArea)
+        println(placemark.country)
+        
+        getForecast(placemark.postalCode)
+        
+    }
+    
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+        println("Error: " + error.localizedDescription)
+    }
+
+    
+    
     
 }
 
