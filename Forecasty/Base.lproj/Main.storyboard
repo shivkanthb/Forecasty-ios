@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -80,9 +79,22 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="degree" translatesAutoresizingMaskIntoConstraints="NO" id="T60-ph-SXa">
                                 <rect key="frame" x="250" y="202" width="36" height="36"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1FM-Q0-Rnv">
+                                <rect key="frame" x="261" y="465" width="43" height="43"/>
+                                <state key="normal" image="refresh">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="refresh" destination="vXZ-lx-hvc" eventType="touchUpInside" id="6rt-LN-FGR"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="BMB-GH-wh5">
+                                <rect key="frame" x="272" y="477" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.17254901960784313" green="0.24313725490196078" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="BMB-GH-wh5" firstAttribute="centerX" secondItem="1FM-Q0-Rnv" secondAttribute="centerX" constant="-0.5" id="2YG-i4-QlX"/>
                             <constraint firstItem="3gO-Rd-YRu" firstAttribute="top" secondItem="lUv-NY-Nna" secondAttribute="bottom" constant="2" id="4ht-iY-dcd"/>
                             <constraint firstItem="WLm-rD-rrq" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="20" id="5r3-ag-9hp"/>
                             <constraint firstItem="rtr-TY-37g" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="44" id="Aer-iZ-Tqe"/>
@@ -92,13 +104,16 @@
                             <constraint firstAttribute="trailingMargin" secondItem="4sZ-ZM-2uu" secondAttribute="trailing" constant="40" id="IRN-d7-IhP"/>
                             <constraint firstAttribute="centerY" secondItem="LNx-HT-ZbW" secondAttribute="centerY" constant="0.5" id="Msv-5g-RgX"/>
                             <constraint firstAttribute="centerX" secondItem="3gO-Rd-YRu" secondAttribute="centerX" id="O5v-Eb-dqD"/>
+                            <constraint firstItem="BMB-GH-wh5" firstAttribute="centerY" secondItem="1FM-Q0-Rnv" secondAttribute="centerY" constant="0.5" id="R17-j3-nrr"/>
                             <constraint firstItem="lUv-NY-Nna" firstAttribute="top" secondItem="gv3-s1-BGl" secondAttribute="bottom" constant="15" id="SXd-Vb-uWO"/>
                             <constraint firstAttribute="centerX" secondItem="afm-fd-DeB" secondAttribute="centerX" id="WUK-XA-22U"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gcq-1h-kPQ" secondAttribute="trailing" constant="44" id="YgR-0d-UYZ"/>
                             <constraint firstItem="T60-ph-SXa" firstAttribute="leading" secondItem="3gO-Rd-YRu" secondAttribute="trailing" constant="20" id="alI-Z6-j0d"/>
                             <constraint firstItem="LNx-HT-ZbW" firstAttribute="top" secondItem="T60-ph-SXa" secondAttribute="bottom" constant="-29" id="bU9-d1-8c0"/>
+                            <constraint firstItem="1FM-Q0-Rnv" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="c66-4c-Qhz"/>
                             <constraint firstItem="rtr-TY-37g" firstAttribute="top" secondItem="LNx-HT-ZbW" secondAttribute="bottom" constant="10" id="cV2-Im-Tfu"/>
                             <constraint firstItem="zCg-9S-rMv" firstAttribute="top" secondItem="rtr-TY-37g" secondAttribute="bottom" constant="5" id="dgb-Vy-2Le"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="1FM-Q0-Rnv" secondAttribute="bottom" constant="16" id="f5F-JO-fXJ"/>
                             <constraint firstItem="LNx-HT-ZbW" firstAttribute="top" secondItem="3gO-Rd-YRu" secondAttribute="bottom" constant="-10" id="fXk-d6-LPC"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="afm-fd-DeB" secondAttribute="bottom" constant="60" id="lYr-Xo-9xg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WLm-rD-rrq" secondAttribute="trailing" constant="-16" id="nOf-cL-6ho"/>
@@ -118,6 +133,8 @@
                         <outlet property="humidityLabel" destination="zCg-9S-rMv" id="G4g-st-ao3"/>
                         <outlet property="iconView" destination="lUv-NY-Nna" id="lxE-1A-9De"/>
                         <outlet property="locationLabel" destination="3gO-Rd-YRu" id="156-Vg-7Xw"/>
+                        <outlet property="refreshActivityIndicator" destination="BMB-GH-wh5" id="Do3-Bc-y3K"/>
+                        <outlet property="refreshButton" destination="1FM-Q0-Rnv" id="XnK-w4-lOy"/>
                         <outlet property="summaryLabel" destination="afm-fd-DeB" id="iI7-V2-RmU"/>
                         <outlet property="tempLabel" destination="LNx-HT-ZbW" id="PX7-63-Skv"/>
                         <outlet property="timeLabel" destination="gv3-s1-BGl" id="CVC-Wt-Ui3"/>
@@ -131,6 +148,7 @@
     </scenes>
     <resources>
         <image name="degree" width="36" height="36"/>
+        <image name="refresh" width="43" height="43"/>
         <image name="sleet" width="46" height="35"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -28,9 +28,15 @@ class ViewController: UIViewController, UISearchBarDelegate, CLLocationManagerDe
     
     @IBOutlet weak var zipSearchBar: UISearchBar!
     
+    @IBOutlet weak var refreshButton: UIButton!
+    
+    @IBOutlet weak var refreshActivityIndicator: UIActivityIndicatorView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        refreshActivityIndicator.hidden = true;
         
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -134,10 +140,14 @@ class ViewController: UIViewController, UISearchBarDelegate, CLLocationManagerDe
         self.zipSearchBar.resignFirstResponder()
     }
     
-    func refresh(sender: AnyObject)
-    {
-        self.tempLabel.text = "88"
+    
+    
+    @IBAction func refresh() {
+        refreshButton.hidden = true
+        refreshActivityIndicator.hidden = false
+        refreshActivityIndicator.startAnimating()
     }
+   
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
