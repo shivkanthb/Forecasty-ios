@@ -56,14 +56,14 @@ class ViewController: UIViewController, UISearchBarDelegate, CLLocationManagerDe
     
     func getForecast(zipc : String)
     {
-        ZIPCODE = zipc
+        
         let baseURL1 = NSURL(string: "http://api.zippopotam.us/us/\(zipc)")
         
         let urldata = NSData(contentsOfURL: baseURL1!, options: nil, error: nil)
         
         if(urldata != nil)
         {
-        
+        ZIPCODE = zipc
         let parsedObject : NSDictionary = NSJSONSerialization.JSONObjectWithData(urldata!, options:nil, error:nil) as NSDictionary
         //println(parsedObject["places"]!)
         
