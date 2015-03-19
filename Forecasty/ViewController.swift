@@ -12,7 +12,7 @@ import CoreLocation
 class ViewController: UIViewController, UISearchBarDelegate, CLLocationManagerDelegate{
 
     let locationManager = CLLocationManager()
-    
+    var ZIPCODE = "";
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var timeLabel: UILabel!
     
@@ -56,10 +56,13 @@ class ViewController: UIViewController, UISearchBarDelegate, CLLocationManagerDe
     
     func getForecast(zipc : String)
     {
+        ZIPCODE = zipc
         let baseURL1 = NSURL(string: "http://api.zippopotam.us/us/\(zipc)")
         
         let urldata = NSData(contentsOfURL: baseURL1!, options: nil, error: nil)
         
+        if(urldata != nil)
+        {
         
         let parsedObject : NSDictionary = NSJSONSerialization.JSONObjectWithData(urldata!, options:nil, error:nil) as NSDictionary
         //println(parsedObject["places"]!)
@@ -117,13 +120,27 @@ class ViewController: UIViewController, UISearchBarDelegate, CLLocationManagerDe
                     self.summaryLabel.text = "\(dictValues.summary)"
                     self.iconView.image = dictValues.iconImg
                     self.locationLabel.text = "\(placeName), \(state)"
+                    //self.view.backgroundColor = UIColor(red: 245.0/255.0, green: 215.0/255.0, blue: 110.0/255.0, alpha: 1.0)
+                    self.refreshActivityIndicator.stopAnimating()
+                    self.refreshActivityIndicator.hidden = true
+                    self.refreshButton.hidden = false
                 })
             }
             else{
                 println("OOPS")
+                
             }
         })
         downloadTask.resume()
+        } // if not nil
+        else
+        {
+            print("error in zipcode")
+            var alert = UIAlertController(title: "Alert", message: "The zipcode entered is not valid", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            //refresh()
+        }
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
@@ -146,6 +163,9 @@ class ViewController: UIViewController, UISearchBarDelegate, CLLocationManagerDe
         refreshButton.hidden = true
         refreshActivityIndicator.hidden = false
         refreshActivityIndicator.startAnimating()
+//        self.locationManager.requestWhenInUseAuthorization()
+//        self.locationManager.startUpdatingLocation()
+        getForecast(ZIPCODE)
     }
    
 
