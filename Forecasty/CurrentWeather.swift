@@ -19,29 +19,29 @@ struct current {
     var iconImg : UIImage?
     init(weather : NSDictionary){
         
-        let currWeather: NSDictionary = weather["currently"] as NSDictionary   // they have to be downcasted as swift wont know automatically as it reads from json
+        let currWeather: NSDictionary = weather["currently"] as! NSDictionary   // they have to be downcasted as swift wont know automatically as it reads from json
         
         
-        var currentUnixTime = currWeather["time"] as Int
-        currTemp = currWeather["temperature"] as Int
-        humidity = currWeather["humidity"] as Double
+        let currentUnixTime = currWeather["time"] as! Int
+        currTemp = currWeather["temperature"] as! Int
+        humidity = currWeather["humidity"] as! Double
         //icon = currWeather["icon"] as String
-        dew = currWeather["dewPoint"] as Double
-        summary = currWeather["summary"] as String
+        dew = currWeather["dewPoint"] as! Double
+        summary = currWeather["summary"] as! String
         
         currtime = convertTime(currentUnixTime)
         
-        iconImg = getIcon(currWeather["icon"] as String)
+        iconImg = getIcon(currWeather["icon"] as! String)
 
     }
     
     func convertTime(unixTime : Int) -> String {
         let unixtime = NSTimeInterval(unixTime)  // important to convert this to NSTimeInterval type.
-        var date1  = NSDate(timeIntervalSince1970: unixtime)
-        var dateformatter = NSDateFormatter()
+        let date1  = NSDate(timeIntervalSince1970: unixtime)
+        let dateformatter = NSDateFormatter()
         dateformatter.timeStyle = .ShortStyle
         
-        var modTime = dateformatter.stringFromDate(date1)
+        let modTime = dateformatter.stringFromDate(date1)
         return(modTime)
     }
     
@@ -82,7 +82,7 @@ struct current {
             imageName = "default"
         }
     
-        var icoImage = UIImage(named: imageName)
+        var icoImage = UIImage(named: imageName as String)
         return icoImage!
         
     }

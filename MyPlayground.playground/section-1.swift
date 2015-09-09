@@ -6,11 +6,12 @@ var str = "Hello, playground"
 
 var longitude = "37.8267"
 var latitude = "-122.423"
-let baseURL1 = NSURL(string: "http://ziptasticapi.com/75033")
+let baseURL1 = NSURL(string: "https://represent.io/shivkanthb.json")
 
+//let baseURL1 = NSURL(string: "http://unetapp.herokuapp.com/api/v1/users?user[handle]=jordan&user[token]=338978d97d78984830d3629f1838cde8")
 let urldata1 = NSData(contentsOfURL: baseURL1!, options: nil, error: nil)
 
-let parsedObject1 : NSDictionary = NSJSONSerialization.JSONObjectWithData(urldata1!, options:nil, error:nil) as NSDictionary
+let parsedObject1 : NSDictionary = NSJSONSerialization.JSONObjectWithData(urldata1!, options:nil, error:nil) as! NSDictionary
 if( parsedObject1["error"] == nil)
 {
 println(parsedObject1["city"])
@@ -40,7 +41,7 @@ let downloadTask : NSURLSessionDownloadTask = sharedSession.downloadTaskWithURL(
     {
         let dataObj = NSData(contentsOfURL: location)
         
-        let parsedObject : NSDictionary = NSJSONSerialization.JSONObjectWithData(dataObj!, options:nil, error:nil) as NSDictionary
+        let parsedObject : NSDictionary = NSJSONSerialization.JSONObjectWithData(dataObj!, options:nil, error:nil) as! NSDictionary
         println(parsedObject)
     }
 })

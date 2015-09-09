@@ -64,21 +64,22 @@ class ViewController: UIViewController, UISearchBarDelegate, CLLocationManagerDe
         if(urldata != nil)
         {
         ZIPCODE = zipc
-        let parsedObject : NSDictionary = NSJSONSerialization.JSONObjectWithData(urldata!, options:nil, error:nil) as NSDictionary
+        let parsedObject : NSDictionary = NSJSONSerialization.JSONObjectWithData(urldata!, options:nil, error:nil) as! NSDictionary
         //println(parsedObject["places"]!)
         
-        let placesArr : NSArray = parsedObject["places"] as NSArray
-        let placesDict : NSDictionary = placesArr[0] as NSDictionary
-        println(placesDict)
+        let placesArr : NSArray = parsedObject["places"] as! NSArray
+            print(placesArr);
+        let placesDict : NSDictionary = placesArr[0] as! NSDictionary
+        print(placesDict)
         
-        var state = placesDict["state"]! as String
-        var lat = placesDict["latitude"]! as String
-        var long = placesDict["longitude"] as String
-        var placeName = placesDict["place name"] as String
+        var state = placesDict["state"]! as! String
+        var lat = placesDict["latitude"]! as! String
+        var long = placesDict["longitude"] as! String
+        var placeName = placesDict["place name"] as! String
         
-        println(state)
-        println("\(lat),\(long)")
-        println(placeName)
+        print(state)
+        print("\(lat),\(long)")
+        print(placeName)
         var longitude = "-122.423"
         var latitude = "37.8267"
         
@@ -102,7 +103,7 @@ class ViewController: UIViewController, UISearchBarDelegate, CLLocationManagerDe
             {
                 let dataObj = NSData(contentsOfURL: location)
                 
-                let weatherDictionary : NSDictionary = NSJSONSerialization.JSONObjectWithData(dataObj!, options:nil, error:nil) as NSDictionary
+                let weatherDictionary : NSDictionary = NSJSONSerialization.JSONObjectWithData(dataObj!, options:nil, error:nil) as! NSDictionary
                 
                 //println(weatherDictionary)
                 
@@ -145,15 +146,15 @@ class ViewController: UIViewController, UISearchBarDelegate, CLLocationManagerDe
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         //searchBar.color = UIColor.whiteColor()
-        getForecast(searchBar.text)
-        println(searchBar.text)
+        getForecast(searchBar.text!)
+        print(searchBar.text)
         searchBar.resignFirstResponder()
         searchBar.text = ""
     }
     
     func hideKeyboard(recognizer : UITapGestureRecognizer)
     {
-        println("tapped")
+        print("tapped")
         self.zipSearchBar.resignFirstResponder()
     }
     
@@ -174,20 +175,20 @@ class ViewController: UIViewController, UISearchBarDelegate, CLLocationManagerDe
         // Dispose of any resources that can be recreated.
     }
 
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [AnyObject]!) {
         
-        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
+        CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {(placemarks, error)->Void in
             
             if (error != nil) {
-                println("Error: " + error.localizedDescription)
+                print("Error: " + error!.localizedDescription)
                 return
             }
             
-            if placemarks.count > 0 {
-                let pm = placemarks[0] as CLPlacemark
+            if placemarks!.count > 0 {
+                let pm = placemarks[0] as! CLPlacemark
                 self.displayLocationInfo(pm)
             } else {
-                println("Error with the data.")
+                print("Error with the data.")
             }
         })
     }
@@ -195,17 +196,17 @@ class ViewController: UIViewController, UISearchBarDelegate, CLLocationManagerDe
     func displayLocationInfo(placemark: CLPlacemark) {
         
         self.locationManager.stopUpdatingLocation()
-        println(placemark.locality)
-        println(placemark.postalCode)
-        println(placemark.administrativeArea)
-        println(placemark.country)
+        print(placemark.locality)
+        print(placemark.postalCode)
+        print(placemark.administrativeArea)
+        print(placemark.country)
         
-        getForecast(placemark.postalCode)
+        getForecast(placemark.postalCode!)
         
     }
     
-    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
-        println("Error: " + error.localizedDescription)
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError!) {
+        print("Error: " + error.localizedDescription)
     }
 
     
